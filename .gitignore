@@ -1,0 +1,8 @@
+.vs/
+Debug/
+Release/
+*/Debug/
+*/Release/
+*/*.vcproj.*.user
+OpenGLSuperBible5th.ncb
+OpenGLSuperBible5th.suo
