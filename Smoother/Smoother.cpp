@@ -50,6 +50,7 @@ void ProcessMenu(int value)
 		glDisable(GL_BLEND);
 		glDisable(GL_LINE_SMOOTH);
 		glDisable(GL_POINT_SMOOTH);
+		glDisable(GL_POLYGON_SMOOTH);
 		break;
 
 	default:

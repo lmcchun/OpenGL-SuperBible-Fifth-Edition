@@ -252,7 +252,7 @@ void SetupRC()
 
 	cameraFrame.MoveForward(-15.0f);
 	cameraFrame.MoveUp(6.0f);
-	cameraFrame.RotateLocalX(float(m3dDegToRad(20.0f)));
+	cameraFrame.RotateLocalX((float)m3dDegToRad(20.0f));
 
 	MakeCube(cubeBatch);
 	MakeFloor(floorBatch);

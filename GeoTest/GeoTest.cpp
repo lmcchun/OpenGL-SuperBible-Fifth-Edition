@@ -113,22 +113,22 @@ void SpecialKeys(int key, int x, int y)
 {
 	if (key == GLUT_KEY_UP)
 	{
-		viewFrame.RotateWorld(static_cast<float>(m3dDegToRad(-5.0f)), 1.0f, 0.0f, 0.0f);
+		viewFrame.RotateWorld((float)m3dDegToRad(-5.0f), 1.0f, 0.0f, 0.0f);
 	}
 
 	if (key == GLUT_KEY_DOWN)
 	{
-		viewFrame.RotateWorld(static_cast<float>(m3dDegToRad(5.0f)), 1.0f, 0.0f, 0.0f);
+		viewFrame.RotateWorld((float)m3dDegToRad(5.0f), 1.0f, 0.0f, 0.0f);
 	}
 
 	if (key == GLUT_KEY_LEFT)
 	{
-		viewFrame.RotateWorld(static_cast<float>(m3dDegToRad(-5.0f)), 0.0f, 1.0f, 0.0f);
+		viewFrame.RotateWorld((float)m3dDegToRad(-5.0f), 0.0f, 1.0f, 0.0f);
 	}
 
 	if (key == GLUT_KEY_RIGHT)
 	{
-		viewFrame.RotateWorld(static_cast<float>(m3dDegToRad(5.0f)), 0.0f, 1.0f, 0.0f);
+		viewFrame.RotateWorld((float)m3dDegToRad(5.0f), 0.0f, 1.0f, 0.0f);
 	}
 
 	// Refresh the Window
