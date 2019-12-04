@@ -86,6 +86,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter4-Perspective", "Cha
 		{9D49C0C7-F2AF-407C-8F2E-AF592F9ED876} = {9D49C0C7-F2AF-407C-8F2E-AF592F9ED876}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter4-SphereWorld", "Chapter4-SphereWorld\Chapter4-SphereWorld.vcproj", "{BE699003-E472-4000-81C3-33AE10B4F03D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FDC89E84-3E71-491F-A69B-5F83255D9793} = {FDC89E84-3E71-491F-A69B-5F83255D9793}
+		{9D49C0C7-F2AF-407C-8F2E-AF592F9ED876} = {9D49C0C7-F2AF-407C-8F2E-AF592F9ED876}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -156,6 +162,10 @@ Global
 		{E3ED7B33-1A58-47CD-B57C-08F599A5D68A}.Debug|Win32.Build.0 = Debug|Win32
 		{E3ED7B33-1A58-47CD-B57C-08F599A5D68A}.Release|Win32.ActiveCfg = Release|Win32
 		{E3ED7B33-1A58-47CD-B57C-08F599A5D68A}.Release|Win32.Build.0 = Release|Win32
+		{BE699003-E472-4000-81C3-33AE10B4F03D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BE699003-E472-4000-81C3-33AE10B4F03D}.Debug|Win32.Build.0 = Debug|Win32
+		{BE699003-E472-4000-81C3-33AE10B4F03D}.Release|Win32.ActiveCfg = Release|Win32
+		{BE699003-E472-4000-81C3-33AE10B4F03D}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
