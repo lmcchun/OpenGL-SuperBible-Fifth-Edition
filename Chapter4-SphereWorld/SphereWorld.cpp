@@ -18,11 +18,13 @@
 #include <GL/glut.h>
 #endif
 
+GLShaderManager		shaderManager;
+
 GLMatrixStack		modelViewMatrix;	// 模型视图矩阵
 GLMatrixStack		projectionMatrix;	// 投影矩阵
 GLFrustum			viewFrustum;		// 视景体
 GLGeometryTransform	transformPipeline;	// 几何变换管线
-GLShaderManager		shaderManager;
+
 GLTriangleBatch		torusBatch;
 GLBatch				floorBatch;
 
@@ -49,7 +51,7 @@ void SetupRC()
 		floorBatch.Vertex3f(20.0f, -0.55f, x);
 		floorBatch.Vertex3f(-20.0f, -0.55f, x);
 	}
-	floorBatch.End();    
+	floorBatch.End();
 }
 
 

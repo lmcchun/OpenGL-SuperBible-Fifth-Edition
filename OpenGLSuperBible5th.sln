@@ -98,6 +98,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter4-SphereWorld2", "Ch
 		{9D49C0C7-F2AF-407C-8F2E-AF592F9ED876} = {9D49C0C7-F2AF-407C-8F2E-AF592F9ED876}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter4-SphereWorld3", "Chapter4-SphereWorld3\Chapter4-SphereWorld3.vcproj", "{48762E31-95B1-4529-8BFA-BA9BF0D279DB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FDC89E84-3E71-491F-A69B-5F83255D9793} = {FDC89E84-3E71-491F-A69B-5F83255D9793}
+		{9D49C0C7-F2AF-407C-8F2E-AF592F9ED876} = {9D49C0C7-F2AF-407C-8F2E-AF592F9ED876}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter4-SphereWorld4", "Chapter4-SphereWorld4\Chapter4-SphereWorld4.vcproj", "{C3B58C62-3D00-493B-A246-129D9D18AA85}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FDC89E84-3E71-491F-A69B-5F83255D9793} = {FDC89E84-3E71-491F-A69B-5F83255D9793}
+		{9D49C0C7-F2AF-407C-8F2E-AF592F9ED876} = {9D49C0C7-F2AF-407C-8F2E-AF592F9ED876}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -176,6 +188,14 @@ Global
 		{B5EF7925-4635-4E67-B2EE-2E1E8C4DE9BF}.Debug|Win32.Build.0 = Debug|Win32
 		{B5EF7925-4635-4E67-B2EE-2E1E8C4DE9BF}.Release|Win32.ActiveCfg = Release|Win32
 		{B5EF7925-4635-4E67-B2EE-2E1E8C4DE9BF}.Release|Win32.Build.0 = Release|Win32
+		{48762E31-95B1-4529-8BFA-BA9BF0D279DB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{48762E31-95B1-4529-8BFA-BA9BF0D279DB}.Debug|Win32.Build.0 = Debug|Win32
+		{48762E31-95B1-4529-8BFA-BA9BF0D279DB}.Release|Win32.ActiveCfg = Release|Win32
+		{48762E31-95B1-4529-8BFA-BA9BF0D279DB}.Release|Win32.Build.0 = Release|Win32
+		{C3B58C62-3D00-493B-A246-129D9D18AA85}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C3B58C62-3D00-493B-A246-129D9D18AA85}.Debug|Win32.Build.0 = Debug|Win32
+		{C3B58C62-3D00-493B-A246-129D9D18AA85}.Release|Win32.ActiveCfg = Release|Win32
+		{C3B58C62-3D00-493B-A246-129D9D18AA85}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -18,6 +18,9 @@
 #include <GL/glut.h>
 #endif
 
+#define NUM_SPHERES 50
+GLFrame spheres[NUM_SPHERES];
+
 GLShaderManager		shaderManager;
 
 GLMatrixStack		modelViewMatrix;	// 模型视图矩阵
@@ -39,7 +42,6 @@ void SetupRC()
 	shaderManager.InitializeStockShaders();
 
 	glEnable(GL_DEPTH_TEST);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -58,6 +60,13 @@ void SetupRC()
 		floorBatch.Vertex3f(-20.0f, -0.55f, x);
 	}
 	floorBatch.End();
+
+	for (int i = 0; i < NUM_SPHERES; ++i)
+	{
+		GLfloat x = ((GLfloat)((rand() % 400) - 200) * 0.1f);
+		GLfloat z = ((GLfloat)((rand() % 400) - 200) * 0.1f);
+		spheres[i].SetOrigin(x, 0.0f, z);
+	}
 }
 
 
@@ -121,9 +130,23 @@ void RenderScene(void)
 	cameraFrame.GetCameraMatrix(mCamera);
 	modelViewMatrix.PushMatrix(mCamera);
 
+	// 将光源位置传变换到视觉坐标系
+	M3DVector4f vLightPos = { 0.0f, 10.0f, 5.0f, 1.0f };
+	M3DVector4f vLightEyePos;
+	m3dTransformVector4(vLightEyePos, vLightPos, mCamera);
+
 	// 绘制背景
 	shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vFloorColor);
 	floorBatch.Draw();
+
+	for (int i = 0; i < NUM_SPHERES; ++i)
+	{
+		modelViewMatrix.PushMatrix();
+		modelViewMatrix.MultMatrix(spheres[i]);
+		shaderManager.UseStockShader(GLT_SHADER_POINT_LIGHT_DIFF, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vLightEyePos, vSphereColor);
+		sphereBatch.Draw();
+		modelViewMatrix.PopMatrix();
+	}
 
 	modelViewMatrix.Translate(0.0f, 0.0f, -2.5f);
 
@@ -132,7 +155,7 @@ void RenderScene(void)
 
 	// 应用旋转并绘制花托
 	modelViewMatrix.Rotate(yRot, 0.0f, 1.0f, 0.0f);
-	shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vTorusColor);
+	shaderManager.UseStockShader(GLT_SHADER_POINT_LIGHT_DIFF, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vLightEyePos, vTorusColor);
 	torusBatch.Draw();
 
 	// "清除" 以前的旋转
@@ -141,7 +164,7 @@ void RenderScene(void)
 	// 应用另一个旋转, 然后进行平移, 然后在绘制球体
 	modelViewMatrix.Rotate(yRot * -2.0f, 0.0f, 1.0f, 0.0f);
 	modelViewMatrix.Translate(0.8f, 0.0f, 0.0f);
-	shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vSphereColor);
+	shaderManager.UseStockShader(GLT_SHADER_POINT_LIGHT_DIFF, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vLightEyePos, vSphereColor);
 	sphereBatch.Draw();
 
 	// 保存以前的模型视图矩阵(单位矩阵)
