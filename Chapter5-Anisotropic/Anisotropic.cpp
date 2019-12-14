@@ -44,6 +44,7 @@ const char *szTextureFiles[TEXTURE_COUNT] = {
 // 为每个纹理对象改变纹理过滤器
 void ProcessMenu(int value)
 {
+	GLfloat fLargest;
 	GLint iLoop;
 
 	for (iLoop = 0; iLoop < TEXTURE_COUNT; ++iLoop)
@@ -74,6 +75,21 @@ void ProcessMenu(int value)
 
 		case 5:
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+			break;
+
+		case 6:
+			if (gltIsExtSupported("GL_EXT_texture_filter_anisotropic"))
+			{
+				glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &fLargest);
+				glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, fLargest);
+			}
+			break;
+
+		case 7:
+			if (gltIsExtSupported("GL_EXT_texture_filter_anisotropic"))
+			{
+				glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
+			}
 			break;
 		}
 	}
@@ -279,7 +295,7 @@ int main(int argc, char *argv[])
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(800, 600);
-	glutCreateWindow("Tunnel");
+	glutCreateWindow("Anisotropic");
 	glutReshapeFunc(ChangeSize);
 	glutSpecialFunc(SpecialKeys);
 	glutDisplayFunc(RenderScene);
@@ -292,6 +308,8 @@ int main(int argc, char *argv[])
 	glutAddMenuEntry("GL_NEAREST_MIPMAP_LINEAR", 3);
 	glutAddMenuEntry("GL_LINEAR_MIPMAP_NEAREST", 4);
 	glutAddMenuEntry("GL_LINEAR_MIPMAP_LINEAR", 5);
+	glutAddMenuEntry("Anisotropic Filter", 6);
+	glutAddMenuEntry("Anisotropic Off", 7);
 
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
