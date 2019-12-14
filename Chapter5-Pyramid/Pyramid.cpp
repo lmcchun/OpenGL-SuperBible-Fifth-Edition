@@ -178,6 +178,7 @@ void SetupRC()
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	LoadTGATexture("../Res/Pyramid/stone.tga", GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE);
+	//glBindTexture(GL_TEXTURE_2D, 0);
 
 	MakePyramid(pyramidBatch);
 
@@ -215,8 +216,8 @@ void RenderScene(void)
 		transformPipeline.GetModelViewMatrix(),
 		transformPipeline.GetProjectionMatrix(), 
 		vLightPos, vWhite, 0);
-
 	pyramidBatch.Draw();
+	//glBindTexture(GL_TEXTURE_2D, 0);
 
 	modelViewMatrix.PopMatrix();
 
