@@ -1,0 +1,17 @@
+// Flat Shader
+// Vertex Shader
+
+#version 130
+
+// Transformation Matrix
+uniform mat4 mvpMatrix;
+
+// Incoming per vertex
+in vec4 vVertex;
+
+void main(void)
+{
+	// This is pretty much it, transform the geometry
+	// 基本上就是这样, 对几何图形进行变换
+	gl_Position = mvpMatrix * vVertex;
+}
