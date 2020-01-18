@@ -1,0 +1,15 @@
+// ProvokingVertex flat shader demo
+// Vertex Shader
+
+#version 130
+
+in vec4 vVertex;
+in vec4 vColor;
+
+flat out vec4 vVaryingColor;
+
+void main(void)
+{
+	vVaryingColor = vColor;
+	gl_Position = vVertex;
+}
