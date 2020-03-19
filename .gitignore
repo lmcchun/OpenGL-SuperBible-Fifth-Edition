@@ -4,5 +4,6 @@ Release/
 */Debug/
 */Release/
 */*.vcproj.*.user
+*/*.vcxproj.user
 OpenGLSuperBible5th.ncb
 OpenGLSuperBible5th.suo
