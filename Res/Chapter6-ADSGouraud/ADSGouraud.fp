@@ -1,4 +1,5 @@
-// Simple Diffuse lighting Shader
+// ADS 点光照着色器
+// 片段着色器
 
 #version 130
 

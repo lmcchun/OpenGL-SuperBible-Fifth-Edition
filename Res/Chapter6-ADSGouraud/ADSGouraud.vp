@@ -37,11 +37,12 @@ void main(void)
 	vVaryingColor += ambientColor;
 	// 镜面光
 	vec3 vReflection = normalize(reflect(-vLightDir, vEyeNormal));
-	float spec = max(0.0, dot(vEyeNormal, vReflection)); // vEyeNormal 是否应该换成观察方向?
+	float specular = max(0.0, dot(vEyeNormal, vReflection)); // vEyeNormal 是否应该换成观察方向?
+	// 如果漫射光为 0, 那么就不考虑镜面反射部分了
 	if (diffuse != 0)
 	{
-		float fSpec = pow(spec, 128.0);
-		vVaryingColor.rgb += specularColor * fSpec;
+		float fSpecular = pow(specular, 128.0);
+		vVaryingColor.rgb += specularColor * fSpecular;
 	}
 	// 不要忘记对多边形进行变换
 	gl_Position = mvpMatrix * vVertex;
