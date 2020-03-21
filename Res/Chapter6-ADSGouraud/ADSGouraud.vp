@@ -1,4 +1,4 @@
-// 简单漫射光着色器
+// ADS 点光照着色器
 // 顶点着色器
 
 #version 130
@@ -8,7 +8,9 @@ in vec4 vVertex;
 in vec3 vNormal;
 
 // Set per batch
+uniform vec4 ambientColor;
 uniform vec4 diffuseColor;
+uniform vec3 specularColor;
 uniform vec3 vLightPosition;
 uniform mat4 mvpMatrix;
 uniform mat4 mvMatrix;
@@ -31,6 +33,16 @@ void main(void)
 	// 用强度乘以漫反射颜色, 将 alpha 值设为 1.0
 	vVaryingColor.rgb = diffuse * diffuseColor.rgb;
 	vVaryingColor.a = diffuseColor.a;
+	// 添加环境光
+	vVaryingColor += ambientColor;
+	// 镜面光
+	vec3 vReflection = normalize(reflect(-vLightDir, vEyeNormal));
+	float spec = max(0.0, dot(vEyeNormal, vReflection)); // vEyeNormal 是否应该换成观察方向?
+	if (diffuse != 0)
+	{
+		float fSpec = pow(spec, 128.0);
+		vVaryingColor.rgb += specularColor * fSpec;
+	}
 	// 不要忘记对多边形进行变换
 	gl_Position = mvpMatrix * vVertex;
 }

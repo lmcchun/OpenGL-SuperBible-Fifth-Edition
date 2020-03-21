@@ -75,6 +75,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter6-DiffuseLight", "Ch
 		{9D49C0C7-F2AF-407C-8F2E-AF592F9ED876} = {9D49C0C7-F2AF-407C-8F2E-AF592F9ED876}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter6-ADSGouraud", "Chapter6-ADSGouraud\Chapter6-ADSGouraud.vcxproj", "{F386F31D-CB21-4B23-B30C-5E188FEA1F61}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FDC89E84-3E71-491F-A69B-5F83255D9793} = {FDC89E84-3E71-491F-A69B-5F83255D9793}
+		{9D49C0C7-F2AF-407C-8F2E-AF592F9ED876} = {9D49C0C7-F2AF-407C-8F2E-AF592F9ED876}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -265,6 +271,14 @@ Global
 		{A9F67318-55E8-43F2-9F42-E1196E14DC30}.Release|Win32.Build.0 = Release|Win32
 		{A9F67318-55E8-43F2-9F42-E1196E14DC30}.Release|x64.ActiveCfg = Release|x64
 		{A9F67318-55E8-43F2-9F42-E1196E14DC30}.Release|x64.Build.0 = Release|x64
+		{F386F31D-CB21-4B23-B30C-5E188FEA1F61}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F386F31D-CB21-4B23-B30C-5E188FEA1F61}.Debug|Win32.Build.0 = Debug|Win32
+		{F386F31D-CB21-4B23-B30C-5E188FEA1F61}.Debug|x64.ActiveCfg = Debug|x64
+		{F386F31D-CB21-4B23-B30C-5E188FEA1F61}.Debug|x64.Build.0 = Debug|x64
+		{F386F31D-CB21-4B23-B30C-5E188FEA1F61}.Release|Win32.ActiveCfg = Release|Win32
+		{F386F31D-CB21-4B23-B30C-5E188FEA1F61}.Release|Win32.Build.0 = Release|Win32
+		{F386F31D-CB21-4B23-B30C-5E188FEA1F61}.Release|x64.ActiveCfg = Release|x64
+		{F386F31D-CB21-4B23-B30C-5E188FEA1F61}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
