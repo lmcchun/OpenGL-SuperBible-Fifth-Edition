@@ -601,6 +601,6 @@ int main(int argc, char* argv[])
 	SetupRC();
 
 	glutMainLoop();
-	glDeleteTextures(4,textures);
+	glDeleteTextures(4, textures);
 	return 0;
 }

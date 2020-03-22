@@ -8,6 +8,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLTools", "GLTools\GLTools.vcxproj", "{FDC89E84-3E71-491F-A69B-5F83255D9793}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Move", "Move\Move.vcxproj", "{8F84B399-2335-4EEF-9C9E-890A2D2D0BCF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9D49C0C7-F2AF-407C-8F2E-AF592F9ED876} = {9D49C0C7-F2AF-407C-8F2E-AF592F9ED876}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Scissor", "Scissor\Scissor.vcxproj", "{86C64CDE-659B-4D49-8FE4-138EAD71F717}"
 EndProject

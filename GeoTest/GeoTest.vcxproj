@@ -60,7 +60,6 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader />
@@ -102,6 +101,9 @@
     <ClCompile Include="GeoTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FreeGLUT\FreeGLUT.vcxproj">
+      <Project>{9d49c0c7-f2af-407c-8f2e-af592f9ed876}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\GLTools\GLTools.vcxproj">
       <Project>{fdc89e84-3e71-491f-a69b-5f83255d9793}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
