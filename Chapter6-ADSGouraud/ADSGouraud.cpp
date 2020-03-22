@@ -56,7 +56,7 @@ void SetupRC(void)
 // Cleanup
 void ShutdownRC(void)
 {
-	//
+	glDeleteProgram(ADSLightShader);
 }
 
 // 进行调用以绘制场景

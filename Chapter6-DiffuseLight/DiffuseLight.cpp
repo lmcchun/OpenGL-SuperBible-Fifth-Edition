@@ -52,7 +52,7 @@ void SetupRC(void)
 // Cleanup
 void ShutdownRC(void)
 {
-	//
+	glDeleteProgram(diffuseLightShader);
 }
 
 // 进行调用以绘制场景
