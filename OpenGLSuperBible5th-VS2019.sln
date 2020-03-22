@@ -101,6 +101,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter6-LitTexture", "Chap
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter6-Dissolve", "Chapter6-Dissolve\Chapter6-Dissolve.vcxproj", "{9BAB35E4-F995-4E4E-8D33-654A1076C3A6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter6-ToonShader", "Chapter6-ToonShader\Chapter6-ToonShader.vcxproj", "{378100C4-9014-4AD5-9F70-9ECDE850DDFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -331,6 +333,14 @@ Global
 		{9BAB35E4-F995-4E4E-8D33-654A1076C3A6}.Release|Win32.Build.0 = Release|Win32
 		{9BAB35E4-F995-4E4E-8D33-654A1076C3A6}.Release|x64.ActiveCfg = Release|x64
 		{9BAB35E4-F995-4E4E-8D33-654A1076C3A6}.Release|x64.Build.0 = Release|x64
+		{378100C4-9014-4AD5-9F70-9ECDE850DDFC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{378100C4-9014-4AD5-9F70-9ECDE850DDFC}.Debug|Win32.Build.0 = Debug|Win32
+		{378100C4-9014-4AD5-9F70-9ECDE850DDFC}.Debug|x64.ActiveCfg = Debug|x64
+		{378100C4-9014-4AD5-9F70-9ECDE850DDFC}.Debug|x64.Build.0 = Debug|x64
+		{378100C4-9014-4AD5-9F70-9ECDE850DDFC}.Release|Win32.ActiveCfg = Release|Win32
+		{378100C4-9014-4AD5-9F70-9ECDE850DDFC}.Release|Win32.Build.0 = Release|Win32
+		{378100C4-9014-4AD5-9F70-9ECDE850DDFC}.Release|x64.ActiveCfg = Release|x64
+		{378100C4-9014-4AD5-9F70-9ECDE850DDFC}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -369,6 +379,7 @@ Global
 		{B5CC1F7A-ED8B-4DAB-958A-E746AA95F270} = {4B9768C0-27D2-4788-9B47-BEBDD76DEA78}
 		{F770487E-32FC-47A3-BAAB-524A019E4F14} = {4B9768C0-27D2-4788-9B47-BEBDD76DEA78}
 		{9BAB35E4-F995-4E4E-8D33-654A1076C3A6} = {4B9768C0-27D2-4788-9B47-BEBDD76DEA78}
+		{378100C4-9014-4AD5-9F70-9ECDE850DDFC} = {4B9768C0-27D2-4788-9B47-BEBDD76DEA78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FD162234-6073-4616-9A8A-F824C526CC09}

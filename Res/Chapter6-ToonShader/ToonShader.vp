@@ -1,0 +1,30 @@
+// 动画光照着色器
+// 顶点着色器
+
+#version 130
+
+// 输入每个顶点, 位置和法线
+in vec4 vVertex;
+in vec3 vNormal;
+
+smooth out float textureCoordinate;
+
+uniform vec3 vLightPosition;
+uniform mat4 mvpMatrix;
+uniform mat4 mvMatrix;
+uniform mat3 normalMatrix;
+
+void main(void) 
+{ 
+	// 获取表面法线的视觉坐标
+	vec3 vEyeNormal = normalMatrix * vNormal;
+	// 获取顶点位置的视觉坐标
+	vec4 vPosition4 = mvMatrix * vVertex;
+	vec3 vPosition3 = vPosition4.xyz / vPosition4.w;
+	// 获取到光源的向量
+	vec3 vLightDir = normalize(vLightPosition - vPosition3);
+	// 从点乘积得到漫反射强度
+	textureCoordinate = max(0.0, dot(vEyeNormal, vLightDir));
+	// 不要忘记对多边形进行变换
+	gl_Position = mvpMatrix * vVertex;
+}
