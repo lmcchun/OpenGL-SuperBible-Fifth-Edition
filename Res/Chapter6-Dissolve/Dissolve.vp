@@ -1,0 +1,34 @@
+// ADS 点光照着色器
+// 顶点着色器
+
+#version 130
+
+// 输入每个顶点, 位置和法向
+in vec4 vVertex;
+in vec3 vNormal;
+in vec2 vTexCoords0;
+
+// Set per batch
+uniform vec3 vLightPosition;
+uniform mat4 mvpMatrix;
+uniform mat4 mvMatrix;
+uniform mat3 normalMatrix;
+
+smooth out vec3 vVaryingNormal;
+smooth out vec3 vVaryingLightDir;
+smooth out vec2 vVaryingTexCoord;
+
+void main(void)
+{
+	// 获取表面法线的视觉坐标
+	vVaryingNormal = normalMatrix * vNormal;
+	// 获取顶点位置的视觉坐标
+	vec4 vPosition4 = mvMatrix * vVertex;
+	vec3 vPosition3 = vPosition4.xyz / vPosition4.w;
+	// 获取到光源的向量
+	vVaryingLightDir = normalize(vLightPosition - vPosition3);
+	// Pass along the texture coordinates
+	vVaryingTexCoord = vTexCoords0;
+	// 不要忘记对多边形进行变换
+	gl_Position = mvpMatrix * vVertex;
+}
