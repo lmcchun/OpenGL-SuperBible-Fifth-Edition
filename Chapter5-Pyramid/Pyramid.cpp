@@ -212,9 +212,8 @@ void RenderScene(void)
 	modelViewMatrix.MultMatrix(mObjectFrame);
 
 	glBindTexture(GL_TEXTURE_2D, textureID);
-	shaderManager.UseStockShader(GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF, 
-		transformPipeline.GetModelViewMatrix(),
-		transformPipeline.GetProjectionMatrix(), 
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF,
+		transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), 
 		vLightPos, vWhite, 0);
 	pyramidBatch.Draw();
 	//glBindTexture(GL_TEXTURE_2D, 0);

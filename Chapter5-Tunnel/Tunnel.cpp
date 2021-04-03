@@ -250,7 +250,7 @@ void RenderScene(void)
 	modelViewMatrix.PushMatrix();
 	modelViewMatrix.Translate(0.0f, 0.0f, viewZ);
 
-	shaderManager.UseStockShader(GLT_SHADER_TEXTURE_REPLACE, transformPipeline.GetModelViewProjectionMatrix(), 0);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_TEXTURE_REPLACE, transformPipeline.GetModelViewProjectionMatrix(), 0);
 
 	glBindTexture(GL_TEXTURE_2D, textures[TEXTURE_FLOOR]);
 	floorBatch.Draw();

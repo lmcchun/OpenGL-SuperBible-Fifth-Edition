@@ -87,13 +87,13 @@ void RenderScene(void)
 	modelViewMatrix.PushMatrix();
 
 	// 绘制背景
-	shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vFloorColor);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vFloorColor);
 	floorBatch.Draw();
 
 	// 绘制旋转的花托
 	modelViewMatrix.Translate(0.0f, 0.0f, -2.5f);
 	modelViewMatrix.Rotate(yRot, 0.0f, 1.0f, 0.0f);
-	shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vTorusColor);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vTorusColor);
 	torusBatch.Draw();
 
 	// 保存以前的模型视图矩阵(单位矩阵)

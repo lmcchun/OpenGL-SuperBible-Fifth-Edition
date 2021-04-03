@@ -51,17 +51,17 @@
 #include <sys/types.h>
 
 typedef struct {
-   int fd;
-   struct termios termio, termio_save;
+	int fd;
+	struct termios termio, termio_save;
 } SERIALPORT;
 
 #elif TARGET_HOST_MS_WINDOWS
 #include <sys/types.h>
 #include <winbase.h>
 typedef struct {
-   HANDLE fh;
-   COMMTIMEOUTS timeouts_save;
-   DCB dcb_save;
+	HANDLE fh;
+	COMMTIMEOUTS timeouts_save;
+	DCB dcb_save;
 } SERIALPORT;
 
 #endif
@@ -103,293 +103,293 @@ typedef struct {
 
 /*****************************************************************/
 
-static SERIALPORT *serial_open ( const char *device );
-static void serial_close ( SERIALPORT *port );
-static int serial_getchar ( SERIALPORT *port );
-static int serial_putchar ( SERIALPORT *port, unsigned char ch );
-static void serial_flush ( SERIALPORT *port );
+static SERIALPORT* serial_open(const char* device);
+static void serial_close(SERIALPORT* port);
+static int serial_getchar(SERIALPORT* port);
+static int serial_putchar(SERIALPORT* port, unsigned char ch);
+static void serial_flush(SERIALPORT* port);
 
 static void send_dial_event(int dial, int value);
 static void poll_dials(int id);
 
 /* local variables */
-static SERIALPORT *dialbox_port=NULL;
+static SERIALPORT* dialbox_port = NULL;
 
 /*****************************************************************/
 
 /*
  * Implementation for glutDeviceGet(GLUT_HAS_DIAL_AND_BUTTON_BOX)
  */
-int fgInputDeviceDetect( void )
+int fgInputDeviceDetect(void)
 {
-    fgInitialiseInputDevices ();
+	fgInitialiseInputDevices();
 
-    if ( !dialbox_port )
-        return 0;
+	if (!dialbox_port)
+		return 0;
 
-    if ( !fgState.InputDevsInitialised )
-        return 0;
+	if (!fgState.InputDevsInitialised)
+		return 0;
 
-    return 1;
+	return 1;
 }
 
 /*
  * Try initializing the input device(s)
  */
-void fgInitialiseInputDevices ( void )
+void fgInitialiseInputDevices(void)
 {
-    if( !fgState.InputDevsInitialised )
-    {
-      /* will return true for VC8 (VC2005) and higher */
+	if (!fgState.InputDevsInitialised)
+	{
+		/* will return true for VC8 (VC2005) and higher */
 #if TARGET_HOST_MS_WINDOWS && ( _MSC_VER >= 1400 ) && HAVE_ERRNO
-        char *dial_device=NULL;
-        size_t sLen;
-        errno_t err = _dupenv_s( &dial_device, &sLen, "GLUT_DIALS_SERIAL" );
-        if (err)
-            fgError("Error getting GLUT_DIALS_SERIAL environment variable");
+		char* dial_device = NULL;
+		size_t sLen;
+		errno_t err = _dupenv_s(&dial_device, &sLen, "GLUT_DIALS_SERIAL");
+		if (err)
+			fgError("Error getting GLUT_DIALS_SERIAL environment variable");
 #else
-        const char *dial_device=NULL;
-        dial_device = getenv ( "GLUT_DIALS_SERIAL" );
+		const char* dial_device = NULL;
+		dial_device = getenv("GLUT_DIALS_SERIAL");
 #endif
 #if TARGET_HOST_MS_WINDOWS
-        if (!dial_device){
-            static char devname[256];
-            DWORD size=sizeof(devname);
-            DWORD type = REG_SZ;
-            HKEY key;
-            if (RegOpenKeyA(HKEY_LOCAL_MACHINE,"SOFTWARE\\FreeGLUT",&key)==ERROR_SUCCESS) {
-                if (RegQueryValueExA(key,"DialboxSerialPort",NULL,&type,(LPBYTE)devname,&size)==ERROR_SUCCESS){
-                    dial_device=devname;
-                }
-                RegCloseKey(key);
-            }
-        }
+		if (!dial_device) {
+			static char devname[256];
+			DWORD size = sizeof(devname);
+			DWORD type = REG_SZ;
+			HKEY key;
+			if (RegOpenKeyA(HKEY_LOCAL_MACHINE, "SOFTWARE\\FreeGLUT", &key) == ERROR_SUCCESS) {
+				if (RegQueryValueExA(key, "DialboxSerialPort", NULL, &type, (LPBYTE)devname, &size) == ERROR_SUCCESS) {
+					dial_device = devname;
+				}
+				RegCloseKey(key);
+			}
+		}
 #endif
-        if ( !dial_device ) return;
-        if ( !( dialbox_port = serial_open ( dial_device ) ) ) return;
-      /* will return true for VC8 (VC2005) and higher */
+		if (!dial_device) return;
+		if (!(dialbox_port = serial_open(dial_device))) return;
+		/* will return true for VC8 (VC2005) and higher */
 #if TARGET_HOST_MS_WINDOWS && ( _MSC_VER >= 1400 ) && HAVE_ERRNO
-        free ( dial_device );  dial_device = NULL;  /* dupenv_s allocates a string that we must free */
+		free(dial_device);  dial_device = NULL;  /* dupenv_s allocates a string that we must free */
 #endif
-        serial_putchar(dialbox_port,DIAL_INITIALIZE);
-        glutTimerFunc ( 10, poll_dials, 0 );
-        fgState.InputDevsInitialised = GL_TRUE;
-    }
+		serial_putchar(dialbox_port, DIAL_INITIALIZE);
+		glutTimerFunc(10, poll_dials, 0);
+		fgState.InputDevsInitialised = GL_TRUE;
+	}
 }
 
 /*
  *
  */
-void fgInputDeviceClose( void )
+void fgInputDeviceClose(void)
 {
-    if ( fgState.InputDevsInitialised )
-    {
-        serial_close ( dialbox_port );
-        dialbox_port = NULL;
-        fgState.InputDevsInitialised = GL_FALSE;
-    }
+	if (fgState.InputDevsInitialised)
+	{
+		serial_close(dialbox_port);
+		dialbox_port = NULL;
+		fgState.InputDevsInitialised = GL_FALSE;
+	}
 }
 
 /********************************************************************/
 
 /* Check all windows for dialbox callbacks */
-static void fghcbEnumDialCallbacks ( SFG_Window *window, SFG_Enumerator *enumerator )
+static void fghcbEnumDialCallbacks(SFG_Window* window, SFG_Enumerator* enumerator)
 {
-    /* Built-in to INVOKE_WCB():  if window->Callbacks[CB_Dials] */
-    INVOKE_WCB ( *window,Dials, ( ((int*)enumerator->data)[0], ((int*)enumerator->data)[1]) );
-    fgEnumSubWindows ( window, fghcbEnumDialCallbacks, enumerator );
+	/* Built-in to INVOKE_WCB():  if window->Callbacks[CB_Dials] */
+	INVOKE_WCB(*window, Dials, (((int*)enumerator->data)[0], ((int*)enumerator->data)[1]));
+	fgEnumSubWindows(window, fghcbEnumDialCallbacks, enumerator);
 }
 
-static void send_dial_event ( int num, int value )
+static void send_dial_event(int num, int value)
 {
-    SFG_Enumerator enumerator;
-    int data[2];
-    data[0] = num;
-    data[1] = value;
-    enumerator.found = GL_FALSE;
-    enumerator.data  =  data;
-    fgEnumWindows ( fghcbEnumDialCallbacks, &enumerator );
+	SFG_Enumerator enumerator;
+	int data[2];
+	data[0] = num;
+	data[1] = value;
+	enumerator.found = GL_FALSE;
+	enumerator.data = data;
+	fgEnumWindows(fghcbEnumDialCallbacks, &enumerator);
 }
 
 /********************************************************************/
-static void poll_dials ( int id )
+static void poll_dials(int id)
 {
-    int data;
-    static int dial_state = DIAL_NEW;
-    static int dial_which;
-    static int dial_value;
-    static int dials[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+	int data;
+	static int dial_state = DIAL_NEW;
+	static int dial_which;
+	static int dial_value;
+	static int dials[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
-    if ( !dialbox_port ) return;
+	if (!dialbox_port) return;
 
-    while ( (data=serial_getchar(dialbox_port)) != EOF )
-    {
-        if ( ( dial_state > DIAL_WHICH_DEVICE ) || IS_DIAL_EVENT ( data ) )
-        {
-            switch ( dial_state )
-            {
-            case DIAL_WHICH_DEVICE:
-                dial_which = data - DIAL_BASE;
-                dial_state++;
-                break;
-            case DIAL_VALUE_HIGH:
-                dial_value = ( data << 8 );
-                dial_state++;
-                break;
-            case DIAL_VALUE_LOW:
-                dial_value |= data;
-                if ( dial_value & 0x8000 ) dial_value -= 0x10000;
-                dials[dial_which] = dial_value;
-                send_dial_event ( dial_which + 1, dial_value * 360 / 256 );
-                dial_state = DIAL_WHICH_DEVICE;
-                break;
-            default:
-                /* error: Impossible state value! */
-                break;
-            }
-        }
-        else if ( data == DIAL_INITIALIZED )
-        {
-            fgState.InputDevsInitialised = GL_TRUE;
-            dial_state = DIAL_WHICH_DEVICE;
-            serial_putchar(dialbox_port,DIAL_SET_AUTO_DIALS);
-            serial_putchar(dialbox_port,0xff);
-            serial_putchar(dialbox_port,0xff);
-        }
-        else  /* Unknown data; try flushing. */
-            serial_flush(dialbox_port);
-    }
+	while ((data = serial_getchar(dialbox_port)) != EOF)
+	{
+		if ((dial_state > DIAL_WHICH_DEVICE) || IS_DIAL_EVENT(data))
+		{
+			switch (dial_state)
+			{
+			case DIAL_WHICH_DEVICE:
+				dial_which = data - DIAL_BASE;
+				dial_state++;
+				break;
+			case DIAL_VALUE_HIGH:
+				dial_value = (data << 8);
+				dial_state++;
+				break;
+			case DIAL_VALUE_LOW:
+				dial_value |= data;
+				if (dial_value & 0x8000) dial_value -= 0x10000;
+				dials[dial_which] = dial_value;
+				send_dial_event(dial_which + 1, dial_value * 360 / 256);
+				dial_state = DIAL_WHICH_DEVICE;
+				break;
+			default:
+				/* error: Impossible state value! */
+				break;
+			}
+		}
+		else if (data == DIAL_INITIALIZED)
+		{
+			fgState.InputDevsInitialised = GL_TRUE;
+			dial_state = DIAL_WHICH_DEVICE;
+			serial_putchar(dialbox_port, DIAL_SET_AUTO_DIALS);
+			serial_putchar(dialbox_port, 0xff);
+			serial_putchar(dialbox_port, 0xff);
+		}
+		else  /* Unknown data; try flushing. */
+			serial_flush(dialbox_port);
+	}
 
-    glutTimerFunc ( 2, poll_dials, 0 );
+	glutTimerFunc(2, poll_dials, 0);
 }
 
 
 /******** OS Specific Serial I/O routines *******/
 #if TARGET_HOST_POSIX_X11 /* ==> Linux/BSD/UNIX POSIX serial I/O */
-static SERIALPORT *serial_open ( const char *device )
+static SERIALPORT* serial_open(const char* device)
 {
-    int fd;
-    struct termios termio;
-    SERIALPORT *port;
+	int fd;
+	struct termios termio;
+	SERIALPORT* port;
 
-    fd = open(device, O_RDWR | O_NONBLOCK );
-    if (fd <0) {
-        perror(device);
-        return NULL;
-    }
+	fd = open(device, O_RDWR | O_NONBLOCK);
+	if (fd < 0) {
+		perror(device);
+		return NULL;
+	}
 
-    port = malloc(sizeof(SERIALPORT));
-    memset(port, 0, sizeof(SERIALPORT));
-    port->fd = fd;
+	port = malloc(sizeof(SERIALPORT));
+	memset(port, 0, sizeof(SERIALPORT));
+	port->fd = fd;
 
-    /* save current port settings */
-    tcgetattr(fd,&port->termio_save);
+	/* save current port settings */
+	tcgetattr(fd, &port->termio_save);
 
-    memset(&termio, 0, sizeof(termio));
-    termio.c_cflag = CS8 | CREAD | HUPCL ;
-    termio.c_iflag = IGNPAR | IGNBRK ;
-    termio.c_cc[VTIME]    = 0;   /* inter-character timer */
-    termio.c_cc[VMIN]     = 1;   /* block read until 1 chars received, when blocking I/O */
+	memset(&termio, 0, sizeof(termio));
+	termio.c_cflag = CS8 | CREAD | HUPCL;
+	termio.c_iflag = IGNPAR | IGNBRK;
+	termio.c_cc[VTIME] = 0;   /* inter-character timer */
+	termio.c_cc[VMIN] = 1;   /* block read until 1 chars received, when blocking I/O */
 
-    cfsetispeed(&termio, B9600);
-    cfsetospeed(&termio, B9600);
-    tcsetattr(fd,TCSANOW,&termio);
+	cfsetispeed(&termio, B9600);
+	cfsetospeed(&termio, B9600);
+	tcsetattr(fd, TCSANOW, &termio);
 
-    serial_flush(port);
-    return port;
+	serial_flush(port);
+	return port;
 }
 
-static void serial_close(SERIALPORT *port)
+static void serial_close(SERIALPORT* port)
 {
-    if (port)
-    {
-        /* restore old port settings */
-        tcsetattr(port->fd,TCSANOW,&port->termio_save);
-        close(port->fd);
-        free(port);
-    }
+	if (port)
+	{
+		/* restore old port settings */
+		tcsetattr(port->fd, TCSANOW, &port->termio_save);
+		close(port->fd);
+		free(port);
+	}
 }
 
-static int serial_getchar(SERIALPORT *port)
+static int serial_getchar(SERIALPORT* port)
 {
-    unsigned char ch;
-    if (!port) return EOF;
-    if (read(port->fd,&ch,1)) return ch;
-    return EOF;
+	unsigned char ch;
+	if (!port) return EOF;
+	if (read(port->fd, &ch, 1)) return ch;
+	return EOF;
 }
 
-static int serial_putchar(SERIALPORT *port, unsigned char ch){
-    if (!port) return 0;
-    return write(port->fd,&ch,1);
+static int serial_putchar(SERIALPORT* port, unsigned char ch) {
+	if (!port) return 0;
+	return write(port->fd, &ch, 1);
 }
 
-static void serial_flush ( SERIALPORT *port )
+static void serial_flush(SERIALPORT* port)
 {
-    tcflush ( port->fd, TCIOFLUSH );
+	tcflush(port->fd, TCIOFLUSH);
 }
 
 #elif TARGET_HOST_MS_WINDOWS
 
-static SERIALPORT *serial_open(const char *device){
-    HANDLE fh;
-    DCB dcb={sizeof(DCB)};
-    COMMTIMEOUTS timeouts;
-    SERIALPORT *port;
+static SERIALPORT* serial_open(const char* device) {
+	HANDLE fh;
+	DCB dcb = { sizeof(DCB) };
+	COMMTIMEOUTS timeouts;
+	SERIALPORT* port;
 
-    fh = CreateFile(device,GENERIC_READ|GENERIC_WRITE,0,NULL,
-      OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);
-    if (!fh) return NULL;
+	fh = CreateFile(device, GENERIC_READ | GENERIC_WRITE, 0, NULL,
+		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (!fh) return NULL;
 
-    port = malloc(sizeof(SERIALPORT));
-    ZeroMemory(port, sizeof(SERIALPORT));
-    port->fh = fh;
+	port = malloc(sizeof(SERIALPORT));
+	ZeroMemory(port, sizeof(SERIALPORT));
+	port->fh = fh;
 
-    /* save current port settings */
-    GetCommState(fh,&port->dcb_save);
-    GetCommTimeouts(fh,&port->timeouts_save);
+	/* save current port settings */
+	GetCommState(fh, &port->dcb_save);
+	GetCommTimeouts(fh, &port->timeouts_save);
 
-    dcb.DCBlength=sizeof(DCB);
-    BuildCommDCB("96,n,8,1",&dcb);
-    SetCommState(fh,&dcb);
+	dcb.DCBlength = sizeof(DCB);
+	BuildCommDCB("96,n,8,1", &dcb);
+	SetCommState(fh, &dcb);
 
-    ZeroMemory(&timeouts,sizeof(timeouts));
-    timeouts.ReadTotalTimeoutConstant=1;
-    timeouts.WriteTotalTimeoutConstant=1;
-    SetCommTimeouts(fh,&timeouts);
+	ZeroMemory(&timeouts, sizeof(timeouts));
+	timeouts.ReadTotalTimeoutConstant = 1;
+	timeouts.WriteTotalTimeoutConstant = 1;
+	SetCommTimeouts(fh, &timeouts);
 
-    serial_flush(port);
+	serial_flush(port);
 
-    return port;
+	return port;
 }
 
-static void serial_close(SERIALPORT *port){
-    if (port){
-        /* restore old port settings */
-        SetCommState(port->fh,&port->dcb_save);
-        SetCommTimeouts(port->fh,&port->timeouts_save);
-        CloseHandle(port->fh);
-        free(port);
-    }
+static void serial_close(SERIALPORT* port) {
+	if (port) {
+		/* restore old port settings */
+		SetCommState(port->fh, &port->dcb_save);
+		SetCommTimeouts(port->fh, &port->timeouts_save);
+		CloseHandle(port->fh);
+		free(port);
+	}
 }
 
-static int serial_getchar(SERIALPORT *port){
-    DWORD n;
-    unsigned char ch;
-    if (!port) return EOF;
-    if (!ReadFile(port->fh,&ch,1,&n,NULL)) return EOF;
-    if (n==1) return ch;
-    return EOF;
+static int serial_getchar(SERIALPORT* port) {
+	DWORD n;
+	unsigned char ch;
+	if (!port) return EOF;
+	if (!ReadFile(port->fh, &ch, 1, &n, NULL)) return EOF;
+	if (n == 1) return ch;
+	return EOF;
 }
 
-static int serial_putchar(SERIALPORT *port, unsigned char ch){
-    DWORD n;
-    if (!port) return 0;
-    return WriteFile(port->fh,&ch,1,&n,NULL);
+static int serial_putchar(SERIALPORT* port, unsigned char ch) {
+	DWORD n;
+	if (!port) return 0;
+	return WriteFile(port->fh, &ch, 1, &n, NULL);
 }
 
-static void serial_flush ( SERIALPORT *port )
+static void serial_flush(SERIALPORT* port)
 {
-    FlushFileBuffers(port->fh);
+	FlushFileBuffers(port->fh);
 }
 
 #endif

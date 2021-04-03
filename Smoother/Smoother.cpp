@@ -71,7 +71,7 @@ void RenderScene(void)
 
 	// Everything is white
 	GLfloat vWhite [] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	shaderManager.UseStockShader(GLT_SHADER_FLAT, viewFrustum.GetProjectionMatrix(), vWhite);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, viewFrustum.GetProjectionMatrix(), vWhite);
 
 	// Draw small stars
 	glPointSize(1.0f);

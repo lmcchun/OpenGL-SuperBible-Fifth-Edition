@@ -71,7 +71,7 @@ void RenderScene(void)
 
 	// Pass this completed matrix to the shader, and render the torus
 	GLfloat vBlack[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-	shaderManager.UseStockShader(GLT_SHADER_FLAT, mModelViewProjection, vBlack);  
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, mModelViewProjection, vBlack);
 	torusBatch.Draw();
 
 	// Swap buffers, and immediately refresh

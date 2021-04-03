@@ -43,7 +43,8 @@ void SetupRC(void)
 	gltMakeTorus(torusBatch, 0.8f, 0.25f, 52, 26);
 	const char* szVertexProgFileName = "../Res/Chapter6-ToonShader/ToonShader.vp";
 	const char* szFragmentProgFileName = "../Res/Chapter6-ToonShader/ToonShader.fp";
-	toonShader = gltLoadShaderPairWithAttributes(szVertexProgFileName, szFragmentProgFileName, 2, GLT_ATTRIBUTE_VERTEX, "vVertex", GLT_ATTRIBUTE_NORMAL, "vNormal");
+	toonShader = gltLoadShaderPairWithAttributes(szVertexProgFileName, szFragmentProgFileName,
+		2, GLT_ATTRIBUTE_VERTEX, "vVertex", GLT_ATTRIBUTE_NORMAL, "vNormal");
 	locLight = glGetUniformLocation(toonShader, "vLightPosition");
 	locMVP = glGetUniformLocation(toonShader, "mvpMatrix");
 	locMV = glGetUniformLocation(toonShader, "mvMatrix");

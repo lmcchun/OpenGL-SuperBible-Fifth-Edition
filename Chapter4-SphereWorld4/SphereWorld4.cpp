@@ -136,14 +136,14 @@ void RenderScene(void)
 	m3dTransformVector4(vLightEyePos, vLightPos, mCamera);
 
 	// 绘制背景
-	shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vFloorColor);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vFloorColor);
 	floorBatch.Draw();
 
 	for (int i = 0; i < NUM_SPHERES; ++i)
 	{
 		modelViewMatrix.PushMatrix();
 		modelViewMatrix.MultMatrix(spheres[i]);
-		shaderManager.UseStockShader(GLT_SHADER_POINT_LIGHT_DIFF, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vLightEyePos, vSphereColor);
+		shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_POINT_LIGHT_DIFF, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vLightEyePos, vSphereColor);
 		sphereBatch.Draw();
 		modelViewMatrix.PopMatrix();
 	}
@@ -155,7 +155,7 @@ void RenderScene(void)
 
 	// 应用旋转并绘制花托
 	modelViewMatrix.Rotate(yRot, 0.0f, 1.0f, 0.0f);
-	shaderManager.UseStockShader(GLT_SHADER_POINT_LIGHT_DIFF, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vLightEyePos, vTorusColor);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_POINT_LIGHT_DIFF, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vLightEyePos, vTorusColor);
 	torusBatch.Draw();
 
 	// "清除" 以前的旋转
@@ -164,7 +164,7 @@ void RenderScene(void)
 	// 应用另一个旋转, 然后进行平移, 然后在绘制球体
 	modelViewMatrix.Rotate(yRot * -2.0f, 0.0f, 1.0f, 0.0f);
 	modelViewMatrix.Translate(0.8f, 0.0f, 0.0f);
-	shaderManager.UseStockShader(GLT_SHADER_POINT_LIGHT_DIFF, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vLightEyePos, vSphereColor);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_POINT_LIGHT_DIFF, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vLightEyePos, vSphereColor);
 	sphereBatch.Draw();
 
 	// 保存以前的模型视图矩阵(单位矩阵)

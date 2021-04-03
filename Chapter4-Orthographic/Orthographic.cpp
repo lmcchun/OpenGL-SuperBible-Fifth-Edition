@@ -40,11 +40,11 @@ void RenderScene(void)
 	modelViewMatix.PushMatrix(viewFrame);
 
 	GLfloat vRed[] = { 1.0f, 0.0f, 0.0f, 1.0f };
-	shaderManager.UseStockShader(GLT_SHADER_DEFAULT_LIGHT, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vRed);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_DEFAULT_LIGHT, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vRed);
 	tubeBatch.Draw();
 
 	GLfloat vGray[] = { 0.75f, 0.75f, 0.75f, 1.0f };
-	shaderManager.UseStockShader(GLT_SHADER_DEFAULT_LIGHT, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vGray);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_DEFAULT_LIGHT, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vGray);
 	innerBatch.Draw();
 
 	modelViewMatix.PopMatrix();

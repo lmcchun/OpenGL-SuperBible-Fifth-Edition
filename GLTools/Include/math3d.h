@@ -569,7 +569,7 @@ void m3dCatmullRom(M3DVector3d vOut, const M3DVector3d vP0, const M3DVector3d vP
 // Compare floats and doubles... 
 inline bool m3dCloseEnough(const float fCandidate, const float fCompare, const float fEpsilon)
     {
-    return (fabs(fCandidate - fCompare) < fEpsilon);
+    return (fabsf(fCandidate - fCompare) < fEpsilon);
     }
     
 inline bool m3dCloseEnough(const double dCandidate, const double dCompare, const double dEpsilon)

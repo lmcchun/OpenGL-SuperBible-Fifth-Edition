@@ -80,7 +80,7 @@ void SetupRC()
 /////////////////////////////////////////////////////////////////////////
 void DrawWireFramedBatch(GLTriangleBatch* pBatch)
 {
-	shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vGreen);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vGreen);
 	pBatch->Draw();
 
 	// Draw black outline
@@ -91,7 +91,7 @@ void DrawWireFramedBatch(GLTriangleBatch* pBatch)
 	glEnable(GL_POLYGON_OFFSET_LINE);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glLineWidth(2.5f);
-	shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vBlack);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vBlack);
 	pBatch->Draw();
 
 	// Restore polygon mode and depht testing

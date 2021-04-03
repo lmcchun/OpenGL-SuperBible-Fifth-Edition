@@ -168,22 +168,22 @@ void RenderScene(void)
 	GLfloat vBlack[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 
 
-	shaderManager.UseStockShader(GLT_SHADER_IDENTITY, vGreen);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_IDENTITY, vGreen);
 	greenBatch.Draw();
 
-	shaderManager.UseStockShader(GLT_SHADER_IDENTITY, vRed);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_IDENTITY, vRed);
 	redBatch.Draw();
 
-	shaderManager.UseStockShader(GLT_SHADER_IDENTITY, vBlue);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_IDENTITY, vBlue);
 	blueBatch.Draw();
 
-	shaderManager.UseStockShader(GLT_SHADER_IDENTITY, vBlack);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_IDENTITY, vBlack);
 	blackBatch.Draw();
 
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	shaderManager.UseStockShader(GLT_SHADER_IDENTITY, vRed);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_IDENTITY, vRed);
 	squareBatch.Draw();
 	glDisable(GL_BLEND);
 

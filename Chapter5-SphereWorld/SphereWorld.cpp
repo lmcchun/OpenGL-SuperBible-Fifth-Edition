@@ -50,7 +50,7 @@ void DrawSongAndDance(GLfloat yRot)
 	// Draw the light source
 	modelViewMatrix.PushMatrix();
 	modelViewMatrix.Translatev(vLightPos);
-	shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vWhite);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vWhite);
 	sphereBatch.Draw(); // π‚‘¥
 	modelViewMatrix.PopMatrix();
 
@@ -59,7 +59,7 @@ void DrawSongAndDance(GLfloat yRot)
 	{
 		modelViewMatrix.PushMatrix();
 		modelViewMatrix.MultMatrix(spheres[i]);
-		shaderManager.UseStockShader(GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF, modelViewMatrix.GetMatrix(), transformPipeline.GetProjectionMatrix(), vLightTransformed, vWhite, 0);
+		shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF, modelViewMatrix.GetMatrix(), transformPipeline.GetProjectionMatrix(), vLightTransformed, vWhite, 0);
 		sphereBatch.Draw();
 		modelViewMatrix.PopMatrix();
 	}
@@ -71,7 +71,7 @@ void DrawSongAndDance(GLfloat yRot)
 
 	// Draw stuff relative to the camera
 	glBindTexture(GL_TEXTURE_2D, uiTextures[1]);
-	shaderManager.UseStockShader(GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF, modelViewMatrix.GetMatrix(), transformPipeline.GetProjectionMatrix(), vLightTransformed, vWhite, 0);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF, modelViewMatrix.GetMatrix(), transformPipeline.GetProjectionMatrix(), vLightTransformed, vWhite, 0);
 	torusBatch.Draw();
 	modelViewMatrix.PopMatrix(); // Erased the rotate
 
@@ -79,7 +79,7 @@ void DrawSongAndDance(GLfloat yRot)
 	modelViewMatrix.Translate(0.8f, 0.0f, 0.0f);
 
 	glBindTexture(GL_TEXTURE_2D, uiTextures[2]);
-	shaderManager.UseStockShader(GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF, modelViewMatrix.GetMatrix(), transformPipeline.GetProjectionMatrix(), vLightTransformed, vWhite, 0);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF, modelViewMatrix.GetMatrix(), transformPipeline.GetProjectionMatrix(), vLightTransformed, vWhite, 0);
 	sphereBatch.Draw();
 }
 
@@ -216,7 +216,7 @@ void RenderScene(void)
 	glBindTexture(GL_TEXTURE_2D, uiTextures[0]);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	static GLfloat vFloorColor[] = { 1.0f, 1.0f, 1.0f, 0.75f};
-	shaderManager.UseStockShader(GLT_SHADER_TEXTURE_MODULATE, transformPipeline.GetModelViewProjectionMatrix(), vFloorColor, 0);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_TEXTURE_MODULATE, transformPipeline.GetModelViewProjectionMatrix(), vFloorColor, 0);
 
 	floorBatch.Draw();
 	glDisable(GL_BLEND);

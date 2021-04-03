@@ -118,7 +118,7 @@ void RenderScene()
 
 	m3dMatrixMultiply44(mFinalTransform, mTranslationMatrix, mRotationMatrix);
 
-	shaderManager.UseStockShader(GLT_SHADER_FLAT, mFinalTransform, vRed);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, mFinalTransform, vRed);
 
 	squareBatch.Draw();
 

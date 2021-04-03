@@ -374,7 +374,7 @@ void RenderBlock(void)
 	case 0: // Wire frame
 		glEnable(GL_BLEND);
 		glEnable(GL_LINE_SMOOTH);
-		shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vRed);
+		shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vRed);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glDisable(GL_CULL_FACE);
 
@@ -384,7 +384,7 @@ void RenderBlock(void)
 		break;
 
 	case 1: // Wire frame, but not the back side... we also want the block to be in the stencil buffer
-		shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vRed);
+		shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vRed);
 
 		// Draw solid block in stencil buffer
 		// Back face culling prevents the back sides from showing through
@@ -407,14 +407,14 @@ void RenderBlock(void)
 		break;
 
 	case 2: // Solid
-		shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vRed);
+		shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vRed);
 
 		// Draw the cube
 		cubeBatch.Draw();
 		break;
 
 	case 3: // Solit & Lit
-		shaderManager.UseStockShader(GLT_SHADER_POINT_LIGHT_DIFF, modelViewMatrix.GetMatrix(), projectionMatrix.GetMatrix(), vLightPos, vRed);
+		shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_POINT_LIGHT_DIFF, modelViewMatrix.GetMatrix(), projectionMatrix.GetMatrix(), vLightPos, vRed);
 
 		// Draw the cube
 		cubeBatch.Draw();
@@ -424,7 +424,7 @@ void RenderBlock(void)
 	case 5: // Textured & Lit
 	default:
 		glBindTexture(GL_TEXTURE_2D, textures[2]);
-		shaderManager.UseStockShader(GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF, modelViewMatrix.GetMatrix(), projectionMatrix.GetMatrix(), vLightPos, vWhite, 0);
+		shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF, modelViewMatrix.GetMatrix(), projectionMatrix.GetMatrix(), vLightPos, vWhite, 0);
 
 		glBindTexture(GL_TEXTURE_2D, textures[1]);
 		topBlock.Draw();
@@ -456,7 +456,7 @@ void RenderFloor(void)
 	case 0: // Wire frame
 		glEnable(GL_BLEND);
 		glEnable(GL_LINE_SMOOTH);
-		shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vBrown);
+		shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vBrown);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glDisable(GL_CULL_FACE);
 		break;
@@ -468,20 +468,20 @@ void RenderFloor(void)
 		glEnable(GL_STENCIL_TEST);
 		glStencilFunc(GL_EQUAL, 0, 0xff);
 
-		shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vBrown);
+		shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vBrown);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		break;
 
 	case 2: // Solid
 	case 3:	// Solit & Lit
-		shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vBrown);
+		shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vBrown);
 		break;
 
 	case 4: // Textured
 	case 5: // Textured & Lit
 	default:
 		glBindTexture(GL_TEXTURE_2D, textures[0]);
-		shaderManager.UseStockShader(GLT_SHADER_TEXTURE_MODULATE, transformPipeline.GetModelViewProjectionMatrix(), vFloor, 0);
+		shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_TEXTURE_MODULATE, transformPipeline.GetModelViewProjectionMatrix(), vFloor, 0);
 		break;
 	}
 

@@ -221,26 +221,26 @@ void SetupRC()
 
 	// Load the Marble
 	glBindTexture(GL_TEXTURE_2D, uiTextures[0]);
-	LoadTGATexture("../Res/Chapter6-TextureRect/marble.tga", GL_LINEAR_MIPMAP_LINEAR,
-		GL_LINEAR, GL_REPEAT);
+	LoadTGATexture("../Res/Chapter6-TextureRect/marble.tga",
+		GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT);
 
 	// Load Mars
 	glBindTexture(GL_TEXTURE_2D, uiTextures[1]);
-	LoadTGATexture("../Res/Chapter6-TextureRect/marslike.tga", GL_LINEAR_MIPMAP_LINEAR,
-		GL_LINEAR, GL_CLAMP_TO_EDGE);
+	LoadTGATexture("../Res/Chapter6-TextureRect/marslike.tga",
+		GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE);
 
 	// Load Moon
 	glBindTexture(GL_TEXTURE_2D, uiTextures[2]);
-	LoadTGATexture("../Res/Chapter6-TextureRect/moonlike.tga", GL_LINEAR_MIPMAP_LINEAR,
-		GL_LINEAR, GL_CLAMP_TO_EDGE);
+	LoadTGATexture("../Res/Chapter6-TextureRect/moonlike.tga",
+		GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE);
 
 	// Load the Logo
 	glBindTexture(GL_TEXTURE_RECTANGLE, uiTextures[3]);
-	LoadTGATextureRect("../Res/Chapter6-TextureRect/OpenGL-Logo.tga", GL_NEAREST,
-		GL_NEAREST, GL_CLAMP_TO_EDGE);
+	LoadTGATextureRect("../Res/Chapter6-TextureRect/OpenGL-Logo.tga",
+		GL_NEAREST, GL_NEAREST, GL_CLAMP_TO_EDGE);
 
-	const char* szVertexProgFileName = "../Res/Chapter6-TextureRect/RectReplace.vp";
-	const char* szFragmentProgFileName = "../Res/Chapter6-TextureRect/RectReplace.fp";
+	const char* szVertexProgFileName = "../Res/Chapter7-TextureRect/RectReplace.vp";
+	const char* szFragmentProgFileName = "../Res/Chapter7-TextureRect/RectReplace.fp";
 	rectReplaceShader = gltLoadShaderPairWithAttributes(szVertexProgFileName, szFragmentProgFileName,
 		2, GLT_ATTRIBUTE_VERTEX, "vVertex", GLT_ATTRIBUTE_TEXTURE0, "vTexCoord");
 

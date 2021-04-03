@@ -152,8 +152,8 @@ void SetupRC()
 	GLfloat radius = 3.0f;
 	for (GLfloat angle = 0.0f; angle <= (2.0f * M3D_PI); angle += 0.3f)
 	{
-		GLfloat x = radius * sin(angle);
-		GLfloat y = radius * cos(angle);
+		GLfloat x = static_cast<GLfloat>(radius * sin(angle));
+		GLfloat y = static_cast<GLfloat>(radius * cos(angle));
 
 		// Specify the point and move the Z value up a little	
 		vPoints[iCounter][0] = x;
@@ -189,7 +189,7 @@ void SetupRC()
 void DrawWireFramedBatch(GLBatch* pBatch)
 {
 	// Draw the batch solid green
-	shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vGreen);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vGreen);
 	pBatch->Draw();
 
 	// Draw black outline
@@ -204,7 +204,7 @@ void DrawWireFramedBatch(GLBatch* pBatch)
 	// Draw black wireframe version of geometry
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glLineWidth(2.5f);
-	shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vBlack);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vBlack);
 	pBatch->Draw();
 
 	// Put everything back the way we found it
@@ -232,7 +232,7 @@ void RenderScene(void)
 	objectFrame.GetMatrix(mObjectFrame);
 	modelViewMatrix.MultMatrix(mObjectFrame);
 
-	shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vBlack);
+	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vBlack);
 
 	switch (nStep)
 	{
