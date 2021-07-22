@@ -856,7 +856,7 @@ GLint gltGrabScreenTGA(const char* szFileName)
 
 	// Attempt to open the file
 	errno_t err = fopen_s(&pFile, szFileName, "wb");
-	if (err)
+	if (err || !pFile)
 	{
 		free(pBits);    // Free buffer and return error
 		return 0;
@@ -900,7 +900,7 @@ GLbyte* gltReadTGABits(const char* szFileName, GLint* iWidth, GLint* iHeight, GL
 
 	// Attempt to open the file
 	errno_t err = fopen_s(&pFile, szFileName, "rb");
-	if (err)
+	if (err || !pFile)
 		return NULL;
 
 	// Read in header (binary)
@@ -1038,11 +1038,11 @@ GLbyte* gltReadBMPBits(const char* szFileName, int* nWidth, int* nHeight)
 	unsigned long lInfoSize = 0;
 	unsigned long lBitSize = 0;
 	GLbyte* pBits = NULL;					// Bitmaps bits
-	BMPHeader	bitmapHeader;
+	BMPHeader bitmapHeader;
 
 	// Attempt to open the file
 	errno_t err = fopen_s(&pFile, szFileName, "rb");
-	if (err)
+	if (err || !pFile)
 		return NULL;
 
 	// File is Open. Read in bitmap header information
@@ -1051,11 +1051,16 @@ GLbyte* gltReadBMPBits(const char* szFileName, int* nWidth, int* nHeight)
 	// Read in bitmap information structure
 	lInfoSize = bitmapHeader.offset - sizeof(BMPHeader);
 	pBitmapInfo = (BMPInfo*)malloc(sizeof(GLbyte) * lInfoSize);
+	if (!pBitmapInfo)
+	{
+		fclose(pFile);
+		return NULL;
+	}
 	if (fread(pBitmapInfo, lInfoSize, 1, pFile) != 1)
 	{
 		free(pBitmapInfo);
 		fclose(pFile);
-		return false;
+		return NULL;
 	}
 
 	// Save the size and dimensions of the bitmap
@@ -1067,18 +1072,22 @@ GLbyte* gltReadBMPBits(const char* szFileName, int* nWidth, int* nHeight)
 	if (pBitmapInfo->header.bits != 24)
 	{
 		free(pBitmapInfo);
-		return false;
+		fclose(pFile);
+		return NULL;
 	}
 
 	if (lBitSize == 0)
-		lBitSize = (*nWidth *
-			pBitmapInfo->header.bits + 7) / 8 *
-		abs(*nHeight);
+		lBitSize = (*nWidth * pBitmapInfo->header.bits + 7) / 8 * abs(*nHeight);
 
 	// Allocate space for the actual bitmap
 	free(pBitmapInfo);
-	pBits = (GLbyte*)malloc(sizeof(GLbyte) * lBitSize);
 
+	pBits = (GLbyte*)malloc(sizeof(GLbyte) * lBitSize);
+	if (!pBits)
+	{
+		fclose(pFile);
+		return NULL;
+	}
 	// Read in the bitmap bits, check for corruption
 	if (fread(pBits, lBitSize, 1, pFile) != 1)
 	{
@@ -1124,7 +1133,7 @@ bool gltLoadShaderFile(const char* szFile, GLuint shader)
 
 	// Open the shader file
 	errno_t err = fopen_s(&fp, szFile, "r");
-	if (!err)
+	if (!err && fp)
 	{
 		// See how long the file is
 		while (fgetc(fp) != EOF)

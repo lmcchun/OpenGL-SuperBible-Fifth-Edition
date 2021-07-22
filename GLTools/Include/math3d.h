@@ -41,6 +41,7 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 #ifndef _MATH3D_LIBRARY__
 #define _MATH3D_LIBRARY__
 
+#include <stddef.h>
 #include <math.h>
 #include <string.h>	// Memcpy lives here on most systems
 
@@ -346,28 +347,28 @@ void m3dLoadIdentity44(M3DMatrix44d m);
 /////////////////////////////////////////////////////////////////////////////
 // Get/Set Column.
 inline void m3dGetMatrixColumn33(M3DVector3f dst, const M3DMatrix33f src, const int column)
-	{ memcpy(dst, src + (3 * column), sizeof(float) * 3); }
+	{ memcpy(dst, src + ((ptrdiff_t)3 * column), sizeof(float) * 3); }
 
 inline void m3dGetMatrixColumn33(M3DVector3d dst, const M3DMatrix33d src, const int column)
-	{ memcpy(dst, src + (3 * column), sizeof(double) * 3); }
+	{ memcpy(dst, src + ((ptrdiff_t)3 * column), sizeof(double) * 3); }
 
 inline void m3dSetMatrixColumn33(M3DMatrix33f dst, const M3DVector3f src, const int column)
-	{ memcpy(dst + (3 * column), src, sizeof(float) * 3); }
+	{ memcpy(dst + ((ptrdiff_t)3 * column), src, sizeof(float) * 3); }
 
 inline void m3dSetMatrixColumn33(M3DMatrix33d dst, const M3DVector3d src, const int column)
-	{ memcpy(dst + (3 * column), src, sizeof(double) * 3); }
+	{ memcpy(dst + ((ptrdiff_t)3 * column), src, sizeof(double) * 3); }
 
 inline void m3dGetMatrixColumn44(M3DVector4f dst, const M3DMatrix44f src, const int column)
-	{ memcpy(dst, src + (4 * column), sizeof(float) * 4); }
+	{ memcpy(dst, src + ((ptrdiff_t)4 * column), sizeof(float) * 4); }
 
 inline void m3dGetMatrixColumn44(M3DVector4d dst, const M3DMatrix44d src, const int column)
-	{ memcpy(dst, src + (4 * column), sizeof(double) * 4); }
+	{ memcpy(dst, src + ((ptrdiff_t)4 * column), sizeof(double) * 4); }
 
 inline void m3dSetMatrixColumn44(M3DMatrix44f dst, const M3DVector4f src, const int column)
-	{ memcpy(dst + (4 * column), src, sizeof(float) * 4); }
+	{ memcpy(dst + ((ptrdiff_t)4 * column), src, sizeof(float) * 4); }
 
 inline void m3dSetMatrixColumn44(M3DMatrix44d dst, const M3DVector4d src, const int column)
-	{ memcpy(dst + (4 * column), src, sizeof(double) * 4); }
+	{ memcpy(dst + ((ptrdiff_t)4 * column), src, sizeof(double) * 4); }
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -21,7 +21,7 @@ GLShaderManager	shaderManager;
 
 GLfloat blockSize = 0.2f;
 GLfloat vVerts[] = {
-	-blockSize, -blockSize, 0.0f, 
+	-blockSize, -blockSize, 0.0f,
 	 blockSize, -blockSize, 0.0f,
 	 blockSize,  blockSize, 0.0f,
 	-blockSize,  blockSize, 0.0f
@@ -33,7 +33,7 @@ GLfloat vVerts[] = {
 void SetupRC()
 {
 	// Black background
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f );
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	shaderManager.InitializeStockShaders();
 
@@ -138,12 +138,12 @@ void SpecialKeys(int key, int x, int y)
 
 	// Recalculate vertex positions
 	vVerts[0] = blockX;
-	vVerts[1] = blockY - blockSize*2;
+	vVerts[1] = blockY - blockSize * 2;
 
-	vVerts[3] = blockX + blockSize*2;
-	vVerts[4] = blockY - blockSize*2;
+	vVerts[3] = blockX + blockSize * 2;
+	vVerts[4] = blockY - blockSize * 2;
 
-	vVerts[6] = blockX + blockSize*2;
+	vVerts[6] = blockX + blockSize * 2;
 	vVerts[7] = blockY;
 
 	vVerts[9] = blockX;

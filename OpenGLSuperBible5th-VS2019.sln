@@ -120,6 +120,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter7-TextureRect", "Cha
 		{9D49C0C7-F2AF-407C-8F2E-AF592F9ED876} = {9D49C0C7-F2AF-407C-8F2E-AF592F9ED876}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "Common\Common.vcxproj", "{99AB46E4-E12E-4882-A6C0-97333EEE6962}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -432,6 +434,14 @@ Global
 		{8BBF3E2A-C803-42E5-869E-9982FB5B74AF}.Release|Win32.Build.0 = Release|Win32
 		{8BBF3E2A-C803-42E5-869E-9982FB5B74AF}.Release|x64.ActiveCfg = Release|x64
 		{8BBF3E2A-C803-42E5-869E-9982FB5B74AF}.Release|x64.Build.0 = Release|x64
+		{99AB46E4-E12E-4882-A6C0-97333EEE6962}.Debug|Win32.ActiveCfg = Debug|Win32
+		{99AB46E4-E12E-4882-A6C0-97333EEE6962}.Debug|Win32.Build.0 = Debug|Win32
+		{99AB46E4-E12E-4882-A6C0-97333EEE6962}.Debug|x64.ActiveCfg = Debug|x64
+		{99AB46E4-E12E-4882-A6C0-97333EEE6962}.Debug|x64.Build.0 = Debug|x64
+		{99AB46E4-E12E-4882-A6C0-97333EEE6962}.Release|Win32.ActiveCfg = Release|Win32
+		{99AB46E4-E12E-4882-A6C0-97333EEE6962}.Release|Win32.Build.0 = Release|Win32
+		{99AB46E4-E12E-4882-A6C0-97333EEE6962}.Release|x64.ActiveCfg = Release|x64
+		{99AB46E4-E12E-4882-A6C0-97333EEE6962}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

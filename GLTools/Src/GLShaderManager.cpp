@@ -359,7 +359,7 @@ bool GLShaderManager::InitializeStockShaders(void)
 GLint GLShaderManager::UseStockShader(GLT_STOCK_SHADER nShaderID, ...)
 {
 	// Check for out of bounds
-	if (nShaderID >= GLT_STOCK_SHADER::GLT_SHADER_LAST)
+	if (nShaderID < GLT_STOCK_SHADER::GLT_SHADER_IDENTITY || nShaderID >= GLT_STOCK_SHADER::GLT_SHADER_LAST)
 		return -1;
 
 	// List of uniforms
@@ -496,7 +496,7 @@ GLint GLShaderManager::UseStockShader(GLT_STOCK_SHADER nShaderID, ...)
 // Lookup a stock shader
 GLuint GLShaderManager::GetStockShader(GLT_STOCK_SHADER nShaderID)
 {
-	if (nShaderID >= GLT_STOCK_SHADER::GLT_SHADER_LAST)
+	if (nShaderID < GLT_STOCK_SHADER::GLT_SHADER_IDENTITY || nShaderID >= GLT_STOCK_SHADER::GLT_SHADER_LAST)
 		return 0;
 
 	return uiStockShaders[static_cast<unsigned int>(nShaderID)];
@@ -525,7 +525,7 @@ GLuint GLShaderManager::LookupShader(const char* szVertexProg, const char* szFra
 // lookup table and can be found again if necessary with LookupShader.
 GLuint GLShaderManager::LoadShaderPair(const char* szVertexProgFileName, const char* szFragProgFileName)
 {
-	SHADERLOOKUPETRY shaderEntry;
+	SHADERLOOKUPETRY shaderEntry = { NULL, NULL, 0 };
 
 	// Make sure it's not already loaded
 	GLuint uiReturn = LookupShader(szVertexProgFileName, szFragProgFileName);
@@ -559,7 +559,7 @@ GLuint GLShaderManager::LoadShaderPairSrc(const char* szName, const char* szVert
 		return uiShader;
 
 	// Ok, make it and add to table
-	SHADERLOOKUPETRY shaderEntry;
+	SHADERLOOKUPETRY shaderEntry = { NULL, NULL, 0 };
 	shaderEntry.uiShaderID = gltLoadShaderPairSrc(szVertexSrc, szFragSrc);
 	if (shaderEntry.uiShaderID == 0)
 		return 0;	// Game over, won't compile
@@ -581,7 +581,7 @@ GLuint GLShaderManager::LoadShaderPairWithAttributes(const char* szVertexProgFil
 	if (uiShader != 0)
 		return uiShader;
 
-	SHADERLOOKUPETRY shaderEntry;
+	SHADERLOOKUPETRY shaderEntry = { NULL, NULL, 0 };
 
 	// Temporary Shader objects
 	GLuint hVertexShader;
@@ -681,7 +681,7 @@ GLuint GLShaderManager::LoadShaderPairSrcWithAttributes(const char* szName, cons
 	if (uiShader != 0)
 		return uiShader;
 
-	SHADERLOOKUPETRY shaderEntry;
+	SHADERLOOKUPETRY shaderEntry = { NULL, NULL, 0 };
 
 	// Temporary Shader objects
 	GLuint hVertexShader;

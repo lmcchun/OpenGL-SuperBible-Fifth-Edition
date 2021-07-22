@@ -93,7 +93,7 @@ enum GLT_SHADER_ATTRIBUTE {
 struct SHADERLOOKUPETRY {
 	char szVertexShaderName[MAX_SHADER_NAME_LENGTH];
 	char szFragShaderName[MAX_SHADER_NAME_LENGTH];
-	GLuint	uiShaderID;
+	GLuint uiShaderID;
 };
 
 

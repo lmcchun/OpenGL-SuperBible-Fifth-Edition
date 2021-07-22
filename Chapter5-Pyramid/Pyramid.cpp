@@ -1,18 +1,13 @@
 // Demonstrates Texture mapping a pyramid
-#include <GLTools.h> // OpenGL toolkit
-#include <GLMatrixStack.h>
-#include <GLFrame.h>
-#include <GLFrustum.h>
-#include <GLBatch.h>
-#include <GLGeometryTransform.h>
 
-#include <math.h>
-#ifdef __APPLE__
-#include <glut/glut.h>
-#else
-#define FREEGLUT_STATIC
-#include <GL/glut.h>
-#endif
+#include "Common.h"
+
+#include "GLMatrixStack.h"
+#include "GLFrame.h"
+#include "GLFrustum.h"
+#include "GLBatch.h"
+#include "GLGeometryTransform.h"
+
 
 /////////////////////////////////////////////////////////////////////////////////
 // An assortment of needed classes
@@ -126,42 +121,6 @@ void MakePyramid(GLBatch& pyramidBatch)
 	pyramidBatch.End();
 }
 
-// Load a TGA as a 2D Texture. Completely initialize the state
-bool LoadTGATexture(const char *szFileName, GLenum minFilter, GLenum magFilter, GLenum wrapMode)
-{
-	GLbyte *pBits;
-	int nWidth, nHeight, nComponents;
-	GLenum eFormat;
-
-	// Read the texture bits
-	pBits = gltReadTGABits(szFileName, &nWidth, &nHeight, &nComponents, &eFormat);
-	if (!pBits)
-	{
-		return false;
-	}
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
-
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glTexImage2D(GL_TEXTURE_2D, 0, nComponents, nWidth, nHeight, 0, eFormat, GL_UNSIGNED_BYTE, pBits);
-
-	free(pBits);
-
-	if (minFilter == GL_LINEAR_MIPMAP_LINEAR || 
-		minFilter == GL_LINEAR_MIPMAP_NEAREST ||
-		minFilter == GL_NEAREST_MIPMAP_LINEAR ||
-		minFilter == GL_NEAREST_MIPMAP_NEAREST)
-	{
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-
-	return true;
-}
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // This function does any needed initialization on the rendering context. 
@@ -169,7 +128,7 @@ bool LoadTGATexture(const char *szFileName, GLenum minFilter, GLenum magFilter, 
 void SetupRC()
 {
 	// Black background
-	glClearColor(0.7f, 0.7f, 0.7f, 1.0f );
+	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
 
 	shaderManager.InitializeStockShaders();
 
@@ -195,9 +154,9 @@ void ShutdownRC(void)
 ///////////////////////////////////////////////////////////////////////////////
 // Called to draw scene
 void RenderScene(void)
-{    
-	static GLfloat vLightPos [] = { 1.0f, 1.0f, 0.0f };
-	static GLfloat vWhite [] = { 1.0f, 1.0f, 1.0f, 1.0f };
+{
+	static GLfloat vLightPos[] = { 1.0f, 1.0f, 0.0f };
+	static GLfloat vWhite[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 	// Clear the window with current clearing color
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -213,7 +172,7 @@ void RenderScene(void)
 
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	shaderManager.UseStockShader(GLT_STOCK_SHADER::GLT_SHADER_TEXTURE_POINT_LIGHT_DIFF,
-		transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), 
+		transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(),
 		vLightPos, vWhite, 0);
 	pyramidBatch.Draw();
 	//glBindTexture(GL_TEXTURE_2D, 0);

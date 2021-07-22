@@ -103,7 +103,7 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(SolutionDir)GLTools\Include\;$(SolutionDir)FreeGLUT\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)GLTools\Include\;$(SolutionDir)FreeGLUT\Include\;$(SolutionDir)Common\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>freeglut_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -124,7 +124,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(SolutionDir)GLTools\Include\;$(SolutionDir)FreeGLUT\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)GLTools\Include\;$(SolutionDir)FreeGLUT\Include\;$(SolutionDir)Common\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>freeglut_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -143,7 +143,7 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(SolutionDir)GLTools\Include\;$(SolutionDir)FreeGLUT\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)GLTools\Include\;$(SolutionDir)FreeGLUT\Include\;$(SolutionDir)Common\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>freeglut_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -166,7 +166,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(SolutionDir)GLTools\Include\;$(SolutionDir)FreeGLUT\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)GLTools\Include\;$(SolutionDir)FreeGLUT\Include\;$(SolutionDir)Common\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>freeglut_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -181,6 +181,9 @@
     <ClCompile Include="SphereWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.vcxproj">
+      <Project>{99ab46e4-e12e-4882-a6c0-97333eee6962}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\FreeGLUT\FreeGLUT.vcxproj">
       <Project>{9d49c0c7-f2af-407c-8f2e-af592f9ed876}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
