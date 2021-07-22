@@ -1,11 +1,11 @@
 // Demonstrates a simple flat shader with transformations
 
 #include <math.h>
-#include <GLTools.h> // OpenGL Toolkit
-#include <GLMatrixStack.h>
-#include <GLFrame.h>
-#include <GLFrustum.h>
-#include <GLGeometryTransform.h>
+#include "GLTools.h" // OpenGL Toolkit
+#include "GLMatrixStack.h"
+#include "GLFrame.h"
+#include "GLFrustum.h"
+#include "GLGeometryTransform.h"
 #include <StopWatch.h>
 
 #ifdef __APPLE__

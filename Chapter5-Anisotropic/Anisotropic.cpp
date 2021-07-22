@@ -1,11 +1,11 @@
 // 演示 Mip 贴图以及使用纹理对象
-#include <GLTools.h>
-#include <GLShaderManager.h>
-#include <GLFrustum.h>
-#include <GLBatch.h>
-#include <GLFrame.h>
-#include <GLMatrixStack.h>
-#include <GLGeometryTransform.h>
+#include "GLTools.h"
+#include "GLShaderManager.h"
+#include "GLFrustum.h"
+#include "GLBatch.h"
+#include "GLFrame.h"
+#include "GLMatrixStack.h"
+#include "GLGeometryTransform.h"
 
 #ifdef __APPLE__
 #include <glut/glut.h>

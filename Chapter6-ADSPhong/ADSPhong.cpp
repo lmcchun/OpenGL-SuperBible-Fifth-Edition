@@ -1,8 +1,8 @@
-#include <GLTools.h> // OpenGL toolkit
-#include <GLMatrixStack.h>
-#include <GLFrame.h>
-#include <GLFrustum.h>
-#include <GLGeometryTransform.h>
+#include "GLTools.h" // OpenGL toolkit
+#include "GLMatrixStack.h"
+#include "GLFrame.h"
+#include "GLFrustum.h"
+#include "GLGeometryTransform.h"
 #include <StopWatch.h>
 
 #include <math.h>

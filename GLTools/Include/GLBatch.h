@@ -63,8 +63,8 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 #endif
 
 
-#include <math3d.h>
-#include <GLBatchBase.h>
+#include "math3d.h"
+#include "GLBatchBase.h"
 
 
 class GLBatch : public GLBatchBase

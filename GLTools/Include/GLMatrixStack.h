@@ -32,9 +32,9 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 #ifndef __GLT_MATRIX_STACK
 #define __GLT_MATRIX_STACK
 
-#include <GLTools.h>
-#include <math3d.h>
-#include <GLFrame.h>
+#include "GLTools.h"
+#include "math3d.h"
+#include "GLFrame.h"
 
 enum class GLT_STACK_ERROR {
 	GLT_STACK_NOERROR = 0,

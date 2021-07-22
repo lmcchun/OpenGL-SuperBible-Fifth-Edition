@@ -1,8 +1,8 @@
 // Move a Block based on arrow key movements,
 // Blend it with background blocks
 
-#include <GLTools.h> // OpenGL toolkit
-#include <GLShaderManager.h>
+#include "GLTools.h" // OpenGL toolkit
+#include "GLShaderManager.h"
 
 #ifdef __APPLE__
 #include <glut/glut.h>

@@ -1,11 +1,11 @@
 // Demonstrates OpenGL Orthographic Projections
 
-#include <GLTools.h> // OpenGL toolkit
-#include <GLMatrixStack.h>
-#include <GLFrame.h>
-#include <GLFrustum.h>
-#include <GLGeometryTransform.h>
-#include <GLBatch.h>
+#include "GLTools.h" // OpenGL toolkit
+#include "GLMatrixStack.h"
+#include "GLFrame.h"
+#include "GLFrustum.h"
+#include "GLGeometryTransform.h"
+#include "GLBatch.h"
 
 #include <math.h>
 #ifdef __APPLE__

@@ -1,7 +1,7 @@
 // Out first OpenGL program that will just draw a triangle on the screen.
 
-#include <GLTools.h> // OpenGL toolkit
-#include <GLShaderManager.h> // Shader Manager Class
+#include "GLTools.h" // OpenGL toolkit
+#include "GLShaderManager.h" // Shader Manager Class
 
 #ifdef __APPLE__
 #include <glut/glut.h> // OS X version of GLUT

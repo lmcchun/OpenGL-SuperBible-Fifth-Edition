@@ -1,7 +1,7 @@
 // Demonstrates point and line antialiasing
 
-#include <GLTools.h> // OpenGL toolkit
-#include <GLFrustum.h>
+#include "GLTools.h" // OpenGL toolkit
+#include "GLFrustum.h"
 
 #ifdef __APPLE__
 #include <glut/glut.h>

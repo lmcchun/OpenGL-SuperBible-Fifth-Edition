@@ -1,11 +1,11 @@
 // New and improved (performance) sphere world
 
-#include <GLTools.h>
-#include <GLShaderManager.h>
-#include <GLFrustum.h>
-#include <GLBatch.h>
-#include <GLMatrixStack.h>
-#include <GLGeometryTransform.h>
+#include "GLTools.h"
+#include "GLShaderManager.h"
+#include "GLFrustum.h"
+#include "GLBatch.h"
+#include "GLMatrixStack.h"
+#include "GLGeometryTransform.h"
 #include <StopWatch.h>
 
 #include <math.h>

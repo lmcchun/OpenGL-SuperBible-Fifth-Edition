@@ -1,6 +1,6 @@
 // Bounce a Block around the screen
-#include <GLTools.h> // OpenGL toolkit
-#include <GLShaderManager.h>
+#include "GLTools.h" // OpenGL toolkit
+#include "GLShaderManager.h"
 
 #ifdef __APPLE__
 #include <glut/glut.h>
