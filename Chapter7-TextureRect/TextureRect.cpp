@@ -252,7 +252,7 @@ void RenderScene(void)
 	glDisable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
 
-	// Do the buffer Swap
+	// Do the buffer swap
 	glutSwapBuffers();
 
 	// Do it again

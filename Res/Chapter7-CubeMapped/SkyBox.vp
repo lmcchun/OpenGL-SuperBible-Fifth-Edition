@@ -1,0 +1,22 @@
+// 天空盒着色器
+// 顶点着色器
+
+#version 330
+
+// 输入每个顶点, 只输入位置
+in vec4 vVertex;
+
+// 变换矩阵
+uniform mat4 mvpMatrix;
+
+// 片段程序的纹理坐标
+smooth out vec3 vVaryingTexCoord;
+
+void main(void)
+{
+    // 传递纹理坐标
+    vVaryingTexCoord = normalize(vVertex.xyz);
+
+    // 不要忘记对几何图形进行变换
+    gl_Position = mvpMatrix * vVertex;
+}

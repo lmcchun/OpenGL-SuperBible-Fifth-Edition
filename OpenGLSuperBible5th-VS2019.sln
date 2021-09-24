@@ -122,6 +122,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter7-TextureRect", "Cha
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "Common\Common.vcxproj", "{99AB46E4-E12E-4882-A6C0-97333EEE6962}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter7-CubeMapped", "Chapter7-CubeMapped\Chapter7-CubeMapped.vcxproj", "{372DD207-9C31-4E3A-AEC4-64B09A67AB10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -442,6 +444,14 @@ Global
 		{99AB46E4-E12E-4882-A6C0-97333EEE6962}.Release|Win32.Build.0 = Release|Win32
 		{99AB46E4-E12E-4882-A6C0-97333EEE6962}.Release|x64.ActiveCfg = Release|x64
 		{99AB46E4-E12E-4882-A6C0-97333EEE6962}.Release|x64.Build.0 = Release|x64
+		{372DD207-9C31-4E3A-AEC4-64B09A67AB10}.Debug|Win32.ActiveCfg = Debug|Win32
+		{372DD207-9C31-4E3A-AEC4-64B09A67AB10}.Debug|Win32.Build.0 = Debug|Win32
+		{372DD207-9C31-4E3A-AEC4-64B09A67AB10}.Debug|x64.ActiveCfg = Debug|x64
+		{372DD207-9C31-4E3A-AEC4-64B09A67AB10}.Debug|x64.Build.0 = Debug|x64
+		{372DD207-9C31-4E3A-AEC4-64B09A67AB10}.Release|Win32.ActiveCfg = Release|Win32
+		{372DD207-9C31-4E3A-AEC4-64B09A67AB10}.Release|Win32.Build.0 = Release|Win32
+		{372DD207-9C31-4E3A-AEC4-64B09A67AB10}.Release|x64.ActiveCfg = Release|x64
+		{372DD207-9C31-4E3A-AEC4-64B09A67AB10}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -483,6 +493,7 @@ Global
 		{378100C4-9014-4AD5-9F70-9ECDE850DDFC} = {4B9768C0-27D2-4788-9B47-BEBDD76DEA78}
 		{210D4BAE-E52D-477F-B3AC-2FFAB7E3B2F2} = {4B9768C0-27D2-4788-9B47-BEBDD76DEA78}
 		{8BBF3E2A-C803-42E5-869E-9982FB5B74AF} = {54B5AC62-E688-49BC-A01C-D9B209A6E098}
+		{372DD207-9C31-4E3A-AEC4-64B09A67AB10} = {54B5AC62-E688-49BC-A01C-D9B209A6E098}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FD162234-6073-4616-9A8A-F824C526CC09}

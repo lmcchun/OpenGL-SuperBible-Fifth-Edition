@@ -1,0 +1,36 @@
+// 反射着色器
+// 顶点着色器
+
+#version 330
+
+// 输入每个顶点, 位置和法向
+in vec4 vVertex;
+in vec3 vNormal;
+
+uniform mat4 mvpMatrix;
+uniform mat4 mvMatrix;
+uniform mat3 normalMatrix;
+uniform mat4 mInverseCamera;
+
+// 片段程序的纹理坐标
+smooth out vec3 vVaryingTexCoord;
+
+void main(void)
+{
+    // 视觉空间中的法线
+    vec3 vEyeNormal = normalMatrix * vNormal;
+
+    // 视觉空间中的顶点位置
+    vec4 vVert4 = mvMatrix * vVertex;
+    vec3 vEyeVertex = normalize(vVert4.xyz / vVert4.w);
+
+    // 获取反射向量
+    vec4 vCoords = vec4(reflect(vEyeVertex, vEyeNormal), 1.0);
+
+    // 通过反转的照相机进行旋转
+    vCoords = mInverseCamera * vCoords;
+    vVaryingTexCoord.xyz = normalize(vCoords.xyz);
+
+    // 不要忘记对几何图形进行变换
+    gl_Position = mvpMatrix * vVertex;
+}
